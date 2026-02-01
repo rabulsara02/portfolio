@@ -18,10 +18,9 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                I&apos;m a full-stack developer with a passion for creating
-                elegant solutions to complex problems. With expertise in modern
-                web technologies, I build applications that are both beautiful
-                and performant.
+                I&apos;m a backend developer with a passion for building
+                robust, scalable systems. I specialize in designing APIs,
+                optimizing databases, and creating reliable infrastructure.
               </p>
               <p>
                 My journey in software development started several years ago,

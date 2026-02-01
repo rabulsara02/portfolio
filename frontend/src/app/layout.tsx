@@ -8,13 +8,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Full-Stack Developer",
-  description: "A passionate full-stack developer creating beautiful and functional web experiences.",
-  keywords: ["developer", "portfolio", "full-stack", "react", "next.js", "python"],
-  authors: [{ name: "Your Name" }],
+  title: "Rahul Bulsara | Backend Developer",
+  description: "A backend developer building robust, scalable systems and APIs.",
+  keywords: ["developer", "portfolio", "backend", "python", "fastapi", "databases"],
+  authors: [{ name: "Rahul Bulsara" }],
   openGraph: {
-    title: "Portfolio | Full-Stack Developer",
-    description: "A passionate full-stack developer creating beautiful and functional web experiences.",
+    title: "Rahul Bulsara | Backend Developer",
+    description: "A backend developer building robust, scalable systems and APIs.",
     type: "website",
   },
 };

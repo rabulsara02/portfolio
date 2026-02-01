@@ -13,8 +13,7 @@ export default function Hero() {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
-            A passionate full-stack developer creating beautiful and functional
-            web experiences.
+            A backend developer building robust, scalable systems and APIs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <a

@@ -3,12 +3,12 @@ import { Project } from '@/types';
 const projects: Project[] = [
   {
     id: '1',
-    title: 'Project One',
+    title: 'URL Shortener',
     description:
-      'A full-stack web application built with modern technologies. Features include user authentication, real-time updates, and responsive design.',
-    technologies: ['Next.js', 'TypeScript', 'PostgreSQL', 'Tailwind'],
-    liveUrl: '#',
-    githubUrl: '#',
+      'A full-stack URL shortening service with click analytics tracking. Features include short code generation, real-time click stats, and interactive API docs via Swagger UI.',
+    technologies: ['FastAPI', 'Python', 'SQLAlchemy', 'PostgreSQL', 'JavaScript'],
+    liveUrl: 'https://url-shortener-production-440d.up.railway.app',
+    githubUrl: 'https://github.com/rabulsara02/url-shortener',
   },
   {
     id: '2',

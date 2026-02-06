@@ -35,18 +35,10 @@ export default function About() {
             </div>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-4 pt-4">
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
+            <div className="pt-4">
+              <div className="text-center p-4 bg-gray-50 rounded-lg inline-block">
                 <div className="text-2xl font-bold text-gray-900">5+</div>
                 <div className="text-sm text-gray-600">Years Experience</div>
-              </div>
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-2xl font-bold text-gray-900">50+</div>
-                <div className="text-sm text-gray-600">Projects</div>
-              </div>
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-2xl font-bold text-gray-900">20+</div>
-                <div className="text-sm text-gray-600">Happy Clients</div>
               </div>
             </div>
           </div>

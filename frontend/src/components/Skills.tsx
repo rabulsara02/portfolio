@@ -1,23 +1,18 @@
 const skills = {
-  frontend: [
-    { name: 'React', level: 90 },
-    { name: 'Next.js', level: 85 },
-    { name: 'TypeScript', level: 85 },
-    { name: 'Tailwind CSS', level: 90 },
-    { name: 'HTML/CSS', level: 95 },
-  ],
+  // frontend: [
+  //   { name: 'React', level: 90 },
+  //   { name: 'Next.js', level: 85 },
+  //   { name: 'TypeScript', level: 85 },
+  //   { name: 'Tailwind CSS', level: 90 },
+  //   { name: 'HTML/CSS', level: 95 },
+  // ],
   backend: [
     { name: 'Python', level: 90 },
-    { name: 'FastAPI', level: 85 },
-    { name: 'Node.js', level: 80 },
+    { name: 'C/C++', level: 80 },
     { name: 'PostgreSQL', level: 80 },
-    { name: 'Redis', level: 70 },
   ],
   tools: [
     { name: 'Git', level: 90 },
-    { name: 'Docker', level: 80 },
-    { name: 'Kubernetes', level: 70 },
-    { name: 'AWS', level: 75 },
     { name: 'CI/CD', level: 80 },
   ],
 };
@@ -53,9 +48,9 @@ export default function Skills() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {/* Frontend */}
-          <div className="bg-white p-6 rounded-xl shadow-sm">
+          {/* <div className="bg-white p-6 rounded-xl shadow-sm">
             <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
               <span className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
                 🎨
@@ -67,7 +62,7 @@ export default function Skills() {
                 <SkillBar key={skill.name} {...skill} />
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Backend */}
           <div className="bg-white p-6 rounded-xl shadow-sm">

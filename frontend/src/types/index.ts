@@ -3,27 +3,13 @@ export interface ContactFormData {
   email: string;
   subject: string;
   message: string;
+  /** Honeypot. Real people leave this empty; bots fill it in. */
+  website?: string;
 }
 
 export interface ContactResponse {
-  id?: string;
   success: boolean;
   message: string;
-  created_at?: string;
-}
-
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  technologies: string[];
-  imageUrl?: string;
-  liveUrl?: string;
-  githubUrl?: string;
-}
-
-export interface Skill {
-  name: string;
-  category: 'frontend' | 'backend' | 'tools' | 'other';
-  level: number;
+  /** Field-level validation errors, keyed by field name. */
+  errors?: Partial<Record<keyof ContactFormData, string>>;
 }

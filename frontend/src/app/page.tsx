@@ -1,9 +1,10 @@
 import {
-  Navbar,
+  Nav,
   Hero,
   About,
-  Skills,
+  Experience,
   Projects,
+  Skills,
   Contact,
   Footer,
 } from '@/components';
@@ -11,12 +12,13 @@ import {
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <main>
+      <Nav />
+      <main id="main">
         <Hero />
         <About />
-        <Skills />
+        <Experience />
         <Projects />
+        <Skills />
         <Contact />
       </main>
       <Footer />

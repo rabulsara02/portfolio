@@ -1,186 +1,125 @@
-# Portfolio Website
+# Portfolio — Rahul Bulsara
 
-A modern full-stack portfolio website built with Next.js and FastAPI.
+Personal site. Next.js App Router, TypeScript, Tailwind v4, deployed on Vercel.
 
-## Tech Stack
+Live: https://portfolio-umber-one-64.vercel.app
 
-**Frontend:**
-- Next.js 14+ with App Router
-- TypeScript
-- Tailwind CSS
-- Supabase Client
+## Editing content
 
-**Backend:**
-- FastAPI (Python)
-- Supabase for database
-- Pydantic for validation
-
-**Deployment:**
-- Docker & Docker Compose
-- Kubernetes configurations
-- Vercel (frontend) compatible
-
-## Project Structure
+**Almost everything on the site lives in one file:**
 
 ```
-portfolio-website/
-├── backend/                 # FastAPI backend
-│   ├── config/             # Configuration settings
-│   ├── models/             # Pydantic models
-│   ├── routers/            # API routes
-│   ├── services/           # Business logic & Supabase
-│   ├── main.py             # FastAPI application
-│   ├── Dockerfile          # Backend Docker config
-│   └── requirements.txt    # Python dependencies
-├── frontend/               # Next.js frontend
-│   ├── src/
-│   │   ├── app/           # Next.js app router
-│   │   ├── components/    # React components
-│   │   ├── lib/           # Utilities & API client
-│   │   └── types/         # TypeScript types
-│   ├── Dockerfile         # Frontend Docker config
-│   └── package.json       # Node dependencies
-├── kubernetes/            # K8s deployment configs
-│   ├── namespace.yaml
-│   ├── backend-deployment.yaml
-│   ├── frontend-deployment.yaml
-│   ├── ingress.yaml
-│   ├── configmap.yaml
-│   └── secrets.yaml.example
-├── docker-compose.yml     # Local development
-└── README.md
+frontend/src/content/site.ts
 ```
 
-## Prerequisites
+Bio, experience, skills, projects, links, nav — all of it. Components read from
+it, so you never need to touch JSX to update the site. Anything marked
+`// TODO(rahul)` is a placeholder or a guess drafted from the resume summary.
 
-- Node.js 18+
-- Python 3.11+
-- Docker & Docker Compose (optional)
-- Supabase account
+### Adding a project
 
-## Supabase Setup
+Append an entry to the `projects` array in `site.ts`:
 
-1. Create a new Supabase project
-2. Create the contacts table:
-
-```sql
-CREATE TABLE contacts (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    subject VARCHAR(200) NOT NULL,
-    message TEXT NOT NULL,
-    read BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Enable Row Level Security
-ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
-
--- Create policy for inserting (public can submit)
-CREATE POLICY "Anyone can submit contact" ON contacts
-    FOR INSERT WITH CHECK (true);
-
--- Create policy for reading (only authenticated users)
-CREATE POLICY "Only authenticated can read" ON contacts
-    FOR SELECT USING (auth.role() = 'authenticated');
+```ts
+{
+  id: 'my-project',
+  title: 'My Project',
+  blurb: 'One line.',
+  description: 'Two or three sentences on what it does and why.',
+  tech: ['Python', 'pytest'],
+  liveUrl: 'https://...',      // optional
+  githubUrl: 'https://...',    // optional
+  status: 'live',              // or 'in-progress' for a dashed placeholder card
+  featured: true,              // optional — makes the card full width
+  mark: 'MP',                  // 2 chars shown on the card
+}
 ```
 
-## Local Development
+Set `featured: true` on at most one project.
 
-### Option 1: Run Separately
+### Adding your resume
 
-**Backend:**
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env
-# Edit .env with your Supabase credentials
-python main.py
+Drop the PDF at `frontend/public/resume.pdf`, then in `site.ts` set:
+
+```ts
+resumeUrl: '/resume.pdf',
 ```
 
-**Frontend:**
+That turns on the Resume button in the hero. Leave it `null` to hide it.
+
+## Structure
+
+```
+frontend/
+├── src/
+│   ├── content/site.ts        ← all copy and data
+│   ├── app/
+│   │   ├── layout.tsx         fonts + metadata
+│   │   ├── page.tsx           section order
+│   │   ├── globals.css        design tokens (colors, fonts, animations)
+│   │   └── api/contact/       contact form endpoint
+│   ├── components/            Nav, Hero, About, Experience, Projects,
+│   │                          Skills, Contact, Footer + shared primitives
+│   ├── lib/supabase.ts        server-only Supabase client
+│   └── types/
+└── public/
+```
+
+## Design
+
+The theme is a lab instrument: dark panel, phosphor-green trace, amber as a
+second channel. Every color, font, and animation lives in the `@theme` block at
+the top of `src/app/globals.css`. Change `--color-phosphor` there and the whole
+site retunes.
+
+Pieces worth knowing about:
+
+- `.graticule` — the fixed scope grid behind everything, masked to fade at the edges
+- `.scanlines` — a barely-visible CRT overlay (deliberately ~1.6% opacity)
+- `.brackets` — screen-corner marks on panels, brighten on hover
+- `Waveform.tsx` — the hero trace. A dim persistent path plus a short bright dash
+  swept along it with `stroke-dashoffset`. Pure CSS, no JS.
+- `Sparkline` (same file) — the small traces on project cards
+
+All text colors clear WCAG AA (4.5:1) against both the page and panel
+backgrounds. If you change the palette, re-check that. Everything animated is
+disabled under `prefers-reduced-motion`.
+
+## Contact form
+
+`POST /api/contact` validates the submission server-side and inserts it into the
+`contacts` table in Supabase. If Supabase is unreachable or unconfigured, the
+form shows a prefilled "email me directly" link instead of failing silently.
+
+Environment variables (server-side only — **not** `NEXT_PUBLIC_`):
+
+```
+SUPABASE_URL=https://<project>.supabase.co
+SUPABASE_KEY=<anon or service-role key>
+```
+
+Set these locally in `frontend/.env.local` and in Vercel under
+Project Settings → Environment Variables. See `frontend/.env.example`.
+
+Reading submissions: Supabase dashboard → Table Editor → `contacts`.
+
+## Local development
+
 ```bash
 cd frontend
 npm install
-cp .env.example .env.local
-# Edit .env.local with your credentials
+cp .env.example .env.local   # then fill in the values
 npm run dev
 ```
 
-### Option 2: Docker Compose
+Open http://localhost:3000.
 
 ```bash
-cp .env.example .env
-# Edit .env with your credentials
-docker-compose up --build
+npm run build   # production build
+npm run lint    # eslint
 ```
-
-The frontend will be available at http://localhost:3000 and the backend API at http://localhost:8000.
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | / | API info |
-| GET | /health | Health check |
-| POST | /api/contact/ | Submit contact form |
-| GET | /api/contact/health | Contact service health |
 
 ## Deployment
 
-### Vercel (Frontend)
-
-1. Connect your GitHub repository to Vercel
-2. Set the root directory to `frontend`
-3. Add environment variables:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `NEXT_PUBLIC_API_URL`
-
-### Kubernetes
-
-```bash
-# Create namespace
-kubectl apply -f kubernetes/namespace.yaml
-
-# Create secrets (copy and edit secrets.yaml.example first)
-kubectl apply -f kubernetes/secrets.yaml
-
-# Apply configurations
-kubectl apply -f kubernetes/configmap.yaml
-kubectl apply -f kubernetes/backend-deployment.yaml
-kubectl apply -f kubernetes/frontend-deployment.yaml
-kubectl apply -f kubernetes/ingress.yaml
-```
-
-### Docker (Backend)
-
-```bash
-cd backend
-docker build -t portfolio-backend .
-docker run -p 8000:8000 \
-  -e SUPABASE_URL=your-url \
-  -e SUPABASE_KEY=your-key \
-  portfolio-backend
-```
-
-## Customization
-
-1. Update personal information in:
-   - `frontend/src/components/Hero.tsx`
-   - `frontend/src/components/About.tsx`
-   - `frontend/src/components/Contact.tsx`
-   - `frontend/src/app/layout.tsx` (metadata)
-
-2. Add your projects in:
-   - `frontend/src/components/Projects.tsx`
-
-3. Update skills in:
-   - `frontend/src/components/Skills.tsx`
-
-## License
-
-MIT
+Pushing to `main` triggers a Vercel deploy. Vercel's root directory for this
+project is `frontend`.

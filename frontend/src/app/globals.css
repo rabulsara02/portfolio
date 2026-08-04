@@ -1,26 +1,257 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ───────────────────────────────────────────────────────────────────────────
+   INSTRUMENT
+   A lab-bench palette: dark panel, phosphor trace, amber channel 2.
+   Change --color-phosphor and the whole site retunes.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* surfaces — darkest to lightest */
+  --color-void: #070b0e;
+  --color-panel: #0c1318;
+  --color-panel-2: #111c22;
+  --color-panel-3: #16232b;
+
+  /* hairlines — line-bright is used on interactive borders, so it clears 3:1 */
+  --color-line: #1b2a33;
+  --color-line-bright: #466272;
+
+  /* foreground — all three clear WCAG AA (4.5:1) on both void and panel */
+  --color-fg: #dee9ef;
+  --color-fg-2: #90a6b3;
+  --color-fg-3: #69818e;
+
+  /* traces */
+  --color-phosphor: #34e5a0;
+  --color-phosphor-deep: #0d6b4b;
+  --color-amber: #ffb347;
+  --color-cyan: #4cc9f0;
+  --color-rose: #ff6b6b;
+
+  --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex), ui-monospace, SFMono-Regular, monospace;
+
+  --radius-panel: 4px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ── Base ─────────────────────────────────────────────────────────────────── */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  background-color: var(--color-void);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-void);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-phosphor);
+  color: var(--color-void);
+}
+
+:where(a, button, input, textarea, [tabindex]):focus-visible {
+  outline: 1px solid var(--color-phosphor);
+  outline-offset: 3px;
+}
+
+/* ── Graticule ────────────────────────────────────────────────────────────── */
+/* The scope grid. Fixed so it reads as a screen behind the content. */
+
+.graticule::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(42, 63, 76, 0.34) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(42, 63, 76, 0.34) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 90% 65% at 50% 30%, #000 20%, transparent 78%);
+}
+
+/* Faint phosphor bloom near the top of the page. */
+.graticule::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 18% 0%, rgba(52, 229, 160, 0.09), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 88% 6%, rgba(76, 201, 240, 0.06), transparent 60%);
+}
+
+/* ── Scanlines ────────────────────────────────────────────────────────────── */
+/* Deliberately barely-there. Enough to suggest a CRT, not enough to hurt. */
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.016) 0px,
+    rgba(255, 255, 255, 0.016) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* ── Corner brackets ──────────────────────────────────────────────────────── */
+/* Screen-corner marks on panels. */
+
+.brackets {
+  position: relative;
+}
+
+.brackets::before,
+.brackets::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-color: var(--color-phosphor);
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+}
+
+.brackets::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.brackets::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.brackets:hover::before,
+.brackets:hover::after {
+  opacity: 1;
+}
+
+/* ── Waveform ─────────────────────────────────────────────────────────────── */
+
+.trace-dim {
+  stroke: var(--color-phosphor);
+  opacity: 0.22;
+}
+
+/* A short bright dash that sweeps along the path, like a refresh scan. */
+.trace-sweep {
+  stroke: var(--color-phosphor);
+  stroke-dasharray: 190 2200;
+  filter: drop-shadow(0 0 5px rgba(52, 179, 160, 0.85));
+  animation: sweep 4.4s linear infinite;
+}
+
+@keyframes sweep {
+  from {
+    stroke-dashoffset: 2390;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.trace-ch2 {
+  stroke: var(--color-amber);
+  opacity: 0.16;
+}
+
+/* ── Status LED ───────────────────────────────────────────────────────────── */
+
+.led {
+  animation: led 2.6s ease-in-out infinite;
+}
+
+@keyframes led {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 6px 0 currentColor;
+  }
+  50% {
+    opacity: 0.45;
+    box-shadow: 0 0 2px 0 currentColor;
+  }
+}
+
+/* ── Caret ────────────────────────────────────────────────────────────────── */
+
+.caret {
+  animation: caret 1.15s steps(2, start) infinite;
+}
+
+@keyframes caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ── Reveal-on-scroll ─────────────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .trace-sweep,
+  .led,
+  .caret {
+    animation: none;
+  }
+
+  .trace-sweep {
+    stroke-dasharray: none;
+    opacity: 0.85;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

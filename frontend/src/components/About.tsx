@@ -1,49 +1,47 @@
+import { about } from '@/content/site';
+import Section from './Section';
+import Reveal from './Reveal';
+
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Image Placeholder */}
-          <div className="relative">
-            <div className="w-full aspect-square bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center">
-              <span className="text-6xl">👨‍💻</span>
-            </div>
-            <div className="absolute -bottom-4 -right-4 w-full h-full border-2 border-gray-900 rounded-2xl -z-10"></div>
-          </div>
-
-          {/* Content */}
-          <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              About Me
-            </h2>
-            <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>
-                I&apos;m a backend developer with a passion for building
-                robust, scalable systems. I specialize in designing APIs,
-                optimizing databases, and creating reliable infrastructure.
-              </p>
-              <p>
-                My journey in software development started several years ago,
-                and since then, I&apos;ve had the opportunity to work on diverse
-                projects ranging from small startups to enterprise applications.
-              </p>
-              <p>
-                When I&apos;m not coding, you can find me exploring new
-                technologies, contributing to open-source projects, or sharing
-                my knowledge with the developer community.
-              </p>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="pt-4">
-              <div className="text-center p-4 bg-gray-50 rounded-lg inline-block">
-                <div className="text-2xl font-bold text-gray-900">5+</div>
-                <div className="text-sm text-gray-600">Years Experience</div>
-              </div>
-            </div>
-          </div>
+    <Section
+      id="about"
+      index="01"
+      channel="Subject"
+      title="Somebody has to find the failure first."
+    >
+      <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-14">
+        <div className="space-y-6">
+          {about.paragraphs.map((p, i) => (
+            <Reveal key={i} delay={i * 80}>
+              <p className="text-[17px] leading-[1.75] text-fg-2">{p}</p>
+            </Reveal>
+          ))}
         </div>
+
+        {/* spec sheet */}
+        <Reveal delay={120}>
+          <div className="brackets border border-line bg-panel">
+            <div className="border-b border-line px-5 py-3">
+              <span className="font-mono text-[10px] tracking-[0.2em] text-fg-3 uppercase">
+                Spec sheet
+              </span>
+            </div>
+            <dl className="divide-y divide-line">
+              {about.facts.map((fact) => (
+                <div key={fact.label} className="px-5 py-4">
+                  <dt className="font-mono text-[10px] tracking-[0.2em] text-phosphor uppercase">
+                    {fact.label}
+                  </dt>
+                  <dd className="mt-1.5 text-[14px] leading-snug text-fg">
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

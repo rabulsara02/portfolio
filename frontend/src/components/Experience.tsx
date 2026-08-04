@@ -9,7 +9,7 @@ export default function Experience() {
       index="02"
       channel="Test log"
       title="Where I've worked."
-      lead="Most recent first. Wireless test engineering now, with a run through NASA's L'SPACE program and a classroom before that."
+      lead="Most recent first. Test engineering now, with a run through NASA's L'SPACE program and a classroom before that."
     >
       <ol className="border-t border-line">
         {experience.map((job, i) => (

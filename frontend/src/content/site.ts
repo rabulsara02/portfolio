@@ -14,7 +14,7 @@
 export const person = {
   name: 'Rahul Bulsara',
   firstName: 'Rahul',
-  role: 'Wireless Test Engineer',
+  role: 'Test Engineer',
 
   // The giant hero headline, split across two lines.
   // Keep both lines short — they're set at ~5.5rem on desktop.
@@ -22,7 +22,7 @@ export const person = {
 
   // Two or three sentences. Sits under the waveform.
   intro:
-    'Wireless test engineer at SGS, where I validate radios and connected devices against regulatory and performance standards. I write the automation that makes that testing repeatable, and I build software on the side.',
+    'Test engineer at SGS, where I validate radios and connected devices against regulatory and performance standards. I write the automation that makes that testing repeatable, and I build software on the side.',
 
   location: 'San Francisco, CA',
   email: 'rahulvbulsara@gmail.com',
@@ -54,7 +54,7 @@ export const about = {
   ],
   // Small stat cards next to the text. Keep to 3 or 4.
   facts: [
-    { label: 'Currently', value: 'Wireless Test Engineer @ SGS' },
+    { label: 'Currently', value: 'Test Engineer @ SGS' },
     { label: 'Education', value: 'MS Texas A&M · BS UC San Diego' },
     { label: 'Focus', value: 'Test automation, RF validation, backend' },
   ],
@@ -75,7 +75,7 @@ export type Job = {
 export const experience: Job[] = [
   {
     company: 'SGS North America',
-    role: 'Wireless Test Engineer',
+    role: 'Test Engineer',
     period: 'Jul 2025 — Present',
     location: 'North America',
     summary:

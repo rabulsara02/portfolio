@@ -34,7 +34,6 @@ export const metadata: Metadata = {
   keywords: [
     'Rahul Bulsara',
     'test engineer',
-    'wireless test engineer',
     'RF testing',
     'test automation',
     'software engineer',

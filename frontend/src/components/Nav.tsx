@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { navLinks } from '@/content/site';
+import { navLinks, person } from '@/content/site';
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -59,8 +59,8 @@ export default function Nav() {
           <span className="flex h-7 w-7 items-center justify-center border border-phosphor/50 font-mono text-[11px] text-phosphor transition-colors group-hover:bg-phosphor group-hover:text-void">
             RB
           </span>
-          <span className="font-mono text-[11px] tracking-[0.2em] text-fg-2 uppercase">
-            Bulsara<span className="text-phosphor">.</span>
+          <span className="font-mono text-[11px] tracking-[0.2em] whitespace-nowrap text-fg-2 uppercase">
+            {person.name}
           </span>
         </a>
 

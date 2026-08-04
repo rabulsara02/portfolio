@@ -24,7 +24,7 @@ export const person = {
   intro:
     'Wireless test engineer at SGS, where I validate radios and connected devices against regulatory and performance standards. I write the automation that makes that testing repeatable, and I build software on the side.',
 
-  location: 'Portland, OR', // TODO(rahul): confirm — resume didn't say
+  location: 'San Francisco, CA',
   email: 'rahulvbulsara@gmail.com',
 
   // Drop a PDF at frontend/public/resume.pdf to turn on the "Datasheet" button.
@@ -116,19 +116,6 @@ export const experience: Job[] = [
       'Worked to mission-style requirements with formal reviews and documentation.',
     ],
     tags: ['Python', 'Git', 'Systems Engineering'],
-  },
-  {
-    company: "NASA L'SPACE",
-    role: 'Computer Engineer Researcher — Mission Concept Academy',
-    period: 'Sep 2022 — Dec 2022',
-    summary:
-      'Mission concept design and feasibility research for a planetary science payload.',
-    // TODO(rahul): fill in the actual mission/payload and your role.
-    bullets: [
-      'Contributed the computing and avionics portion of a mission concept proposal.',
-      'Used JMARS for site selection and mission planning analysis.',
-    ],
-    tags: ['JMARS', 'Research', 'Systems Design'],
   },
 ];
 

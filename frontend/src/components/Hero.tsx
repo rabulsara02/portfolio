@@ -25,11 +25,8 @@ export default function Hero() {
       <Container>
         <Reveal>
           <div className="flex items-center gap-3 font-mono text-[11px] tracking-[0.2em] uppercase">
-            <span className="text-phosphor">CH1</span>
-            <span aria-hidden className="h-px w-5 bg-line-bright" />
-            <span className="text-fg-3">SGS North America</span>
-            <span aria-hidden className="h-px w-5 bg-line-bright" />
-            <span className="text-fg-3">Wireless</span>
+            <span aria-hidden className="h-px w-6 bg-phosphor/50" />
+            <span className="text-phosphor">Test Engineer</span>
           </div>
         </Reveal>
 

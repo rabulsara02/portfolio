@@ -32,7 +32,20 @@ export async function sendContactNotification(
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_FROM_EMAIL;
 
-  if (!apiKey || !from) return;
+  // Say so rather than returning silently. A quiet no-op is indistinguishable
+  // from a successful send in the logs, which makes "why didn't I get an
+  // email" much harder to answer than it needs to be.
+  if (!apiKey || !from) {
+    const missing = [
+      !apiKey && 'RESEND_API_KEY',
+      !from && 'CONTACT_FROM_EMAIL',
+    ].filter(Boolean);
+    console.warn(
+      `[contact] Email notification skipped — missing ${missing.join(' and ')}. ` +
+        'The submission was still saved.'
+    );
+    return;
+  }
 
   const to = process.env.CONTACT_TO_EMAIL ?? person.email;
 
@@ -86,6 +99,8 @@ export async function sendContactNotification(
         res.status,
         await res.text()
       );
+    } else {
+      console.info(`[contact] Notification sent to ${to}.`);
     }
   } catch (error) {
     console.error('[contact] Could not reach Resend:', error);

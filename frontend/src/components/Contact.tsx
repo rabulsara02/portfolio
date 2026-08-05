@@ -65,7 +65,7 @@ export default function Contact() {
     <Section
       id="contact"
       index="05"
-      channel="Signal in"
+      channel="Contact"
       title="Let's talk."
       lead="Roles, projects, or a question about test engineering — I read everything."
     >
@@ -78,7 +78,7 @@ export default function Contact() {
               className="brackets group block border border-line bg-panel p-5 transition-colors hover:border-phosphor/50"
             >
               <span className="font-mono text-[10px] tracking-[0.2em] text-fg-3 uppercase">
-                Direct line
+                Email
               </span>
               <span className="mt-2 block font-mono text-[14px] break-all text-phosphor group-hover:underline">
                 {person.email}
@@ -132,13 +132,13 @@ export default function Contact() {
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-3 sm:px-6">
               <span className="font-mono text-[10px] tracking-[0.2em] text-fg-3 uppercase">
-                Intake form
+                Send a message
               </span>
               <span className="font-mono text-[10px] tracking-[0.18em] text-fg-3 uppercase">
                 {status === 'sending'
-                  ? 'Transmitting'
+                  ? 'Sending'
                   : status === 'sent'
-                    ? 'Received'
+                    ? 'Sent'
                     : 'Ready'}
               </span>
             </div>
@@ -230,7 +230,7 @@ export default function Contact() {
                 disabled={status === 'sending'}
                 className="mt-6 w-full bg-phosphor px-6 py-3.5 font-mono text-[12px] tracking-[0.14em] text-void uppercase transition-colors hover:bg-fg disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {status === 'sending' ? 'Transmitting…' : 'Transmit'}
+                {status === 'sending' ? 'Sending…' : 'Send message'}
               </button>
             </div>
           </form>

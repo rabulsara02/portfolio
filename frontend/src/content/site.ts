@@ -3,9 +3,7 @@
  *  SINGLE SOURCE OF TRUTH FOR EVERYTHING ON THE SITE
  * ─────────────────────────────────────────────────────────────────────────────
  *  Edit this file to update the portfolio. No component changes needed.
- *
- *  Anything marked  // TODO(rahul)  is a placeholder or an educated guess
- *  pulled from the resume summary — replace it with the real thing.
+ *  Everything here is drawn from Bulsara_Rahul_Resume_Main.pdf.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -16,13 +14,11 @@ export const person = {
   firstName: 'Rahul',
   role: 'Test Engineer',
 
-  // The giant hero headline, split across two lines.
-  // Keep both lines short — they're set at ~5.5rem on desktop.
+  // The hero headline, split across two lines. Keep both short.
   headline: ['I break things', 'on purpose'] as [string, string],
 
-  // Two or three sentences. Sits under the waveform.
   intro:
-    'Test engineer at SGS, where I validate radios and connected devices against regulatory and performance standards. I write the automation that makes that testing repeatable, and I build software on the side.',
+    "I'm a test engineer. Most recently at SGS, running RF conformance testing on 5G NR and LTE devices against 3GPP specifications. I'm now doing an MS at Texas A&M and building conformance test harnesses — the kind of tooling that tells you whether a failure belongs to the device or to your own test rig.",
 
   location: 'San Francisco, CA',
   email: 'rahulvbulsara@gmail.com',
@@ -31,12 +27,12 @@ export const person = {
   // resolve Open Graph image paths. No trailing slash.
   siteUrl: 'https://rahulbulsara.com',
 
-  // Drop a PDF at frontend/public/resume.pdf to turn on the "Datasheet" button.
-  // Set to null to hide the button.
+  // Drop a PDF at frontend/public/resume.pdf to turn on the Resume button.
+  // Set to null to hide it.
   resumeUrl: null as string | null,
 
-  // Shown in the hero front panel next to a blinking status LED.
-  availability: 'Accepting signals',
+  // Shown in the hero panel next to a status light.
+  availability: 'Open to SDET and test automation roles',
 } as const;
 
 export const links = {
@@ -48,21 +44,34 @@ export const links = {
 /* ── About ────────────────────────────────────────────────────────────────── */
 
 export const about = {
-  heading: 'About',
-  // Each string is a paragraph.
   paragraphs: [
-    // TODO(rahul): rewrite in your own voice — this is drafted from your resume.
-    "I test wireless devices for a living. That means sitting between a spec sheet and a piece of hardware and figuring out where the two disagree — running RF and protocol test suites, chasing down intermittent failures, and writing up findings clearly enough that someone can act on them.",
-    "The part I like most is the automation. Manual test passes don't scale and they don't stay honest, so I spend a lot of my time turning repeated lab procedures into Python that runs the same way every time. That's also how I got deeper into software generally.",
-    "Outside of work I build small full-stack projects to keep those muscles working — APIs, databases, and the occasional front end. I have an MS from Texas A&M and a BS from UC San Diego, both in computer engineering.", // TODO(rahul): confirm degree fields
+    'At SGS I ran RF conformance testing on 5G NR and LTE devices — Keysight and Anritsu platforms, 3GPP specifications, and a lot of time spent working out whether a failure belonged to the device or to the bench.',
+    'The part I kept coming back to was the automation. I built a Python service there that cross-checked license files against multi-format test data and test case requirements, which took manual setup errors off the table across thousands of configurations.',
+    "Now I'm doing an MS in Mathematics at Texas A&M and building test infrastructure on my own time. Two conformance harnesses so far, and both of them measure their own effectiveness rather than just reporting green — I'd rather know what my tests miss than assume they catch everything.",
   ],
-  // Small stat cards next to the text. Keep to 3 or 4.
   facts: [
-    { label: 'Currently', value: 'Test Engineer @ SGS' },
-    { label: 'Education', value: 'MS Texas A&M · BS UC San Diego' },
-    { label: 'Focus', value: 'Test automation, RF validation, backend' },
+    { label: 'Currently', value: 'MS Mathematics · Texas A&M' },
+    { label: 'Previously', value: 'Wireless Test Engineer · SGS' },
+    { label: 'Focus', value: 'Test automation, conformance, CI' },
   ],
 } as const;
+
+/* ── Education ────────────────────────────────────────────────────────────── */
+
+export const education = [
+  {
+    school: 'Texas A&M University',
+    degree: 'MS, Mathematics',
+    period: 'Jan 2026 — Dec 2027',
+    current: true,
+  },
+  {
+    school: 'University of California, San Diego',
+    degree: 'BS, Mathematics and Computer Science',
+    period: 'Sep 2023 — Jun 2025',
+    current: false,
+  },
+] as const;
 
 /* ── Experience ───────────────────────────────────────────────────────────── */
 
@@ -71,6 +80,8 @@ export type Job = {
   role: string;
   period: string;
   location?: string;
+  /** Drives the "Current" status light. */
+  current?: boolean;
   summary: string;
   bullets: string[];
   tags: string[];
@@ -78,154 +89,174 @@ export type Job = {
 
 export const experience: Job[] = [
   {
-    company: 'SGS North America',
-    role: 'Test Engineer',
-    period: 'Jul 2025 — Present',
-    location: 'North America',
+    company: 'SGS — North America',
+    role: 'Wireless Test Engineer',
+    period: 'Jul 2025 — Dec 2025',
+    location: 'San Diego, CA',
     summary:
-      'Regulatory and performance testing for wireless and connected devices in an accredited lab.',
-    // TODO(rahul): these are drafted from a generic wireless-test-engineer profile.
-    // Replace with what you actually do — specific standards, tools, and outcomes.
+      'RF conformance testing on cellular devices in an accredited lab, plus the automation to make it repeatable.',
     bullets: [
-      'Run RF and protocol conformance testing on wireless devices against regulatory and carrier requirements.',
-      'Write Python tooling to automate repeated lab procedures and instrument control, cutting manual test time.',
-      'Debug intermittent and hard-to-reproduce failures across firmware, RF, and test-harness layers.',
-      'Produce test reports and documentation that engineering and compliance teams use to make ship decisions.',
+      'Performed RF conformance testing on 5G NR and LTE devices using Keysight and Anritsu platforms, ensuring compliance with 3GPP specifications.',
+      'Automated license validation for 5G NR/LTE test cases with a Python service that cross-checked license files and multi-format test data (Excel, HTML) against test case requirements — eliminating manual setup errors and cutting test plan setup time across thousands of configurations.',
+      'Applied 3GPP standards and RF engineering principles to troubleshoot, analyze, and optimize device performance alongside cross-functional RF teams.',
     ],
-    tags: ['RF Testing', 'Python', 'Test Automation', 'Debugging', 'Firmware', 'Linux'],
+    tags: ['5G NR', 'LTE', '3GPP', 'Keysight', 'Anritsu', 'Python', 'RF Conformance'],
   },
   {
     company: 'Microsoft TEALS',
     role: 'Instructor Assistant',
-    period: '2023 — 2024', // TODO(rahul): confirm end date
-    location: 'Oregon',
+    period: 'Aug 2023 — Aug 2024',
+    location: 'Oregon, WI',
     summary:
-      'Volunteer classroom support for a high school computer science program.',
+      'Classroom support for a high school AP Computer Science program.',
     bullets: [
-      'Co-taught introductory computer science alongside a classroom teacher.',
-      'Worked one-on-one with students on debugging, program design, and core CS concepts.',
+      'Designed curriculum for High School AP Computer Science covering introductory Python and Java, improving lesson efficiency by 50% and giving students more time on projects and assignments.',
     ],
-    tags: ['Teaching', 'Java', 'CS Fundamentals'],
+    tags: ['Teaching', 'Python', 'Java', 'Curriculum Design'],
   },
   {
     company: "NASA L'SPACE",
     role: 'Software Engineer Intern',
-    period: 'Jan 2023 — May 2023', // TODO(rahul): confirm end date
+    period: 'Jan 2023 — May 2023',
     location: 'Remote',
     summary:
-      'Software work inside NASA’s L’SPACE virtual internship program.',
-    // TODO(rahul): fill in what you actually built here.
+      "Proposal research inside NASA's L'SPACE virtual internship program.",
     bullets: [
-      'Built and tested software components as part of a distributed engineering team.',
-      'Worked to mission-style requirements with formal reviews and documentation.',
+      'Drafted a NASA proposal outlining the use of Finite Element Models enhanced by AI — Artificially Learned Finite Elements (ALFE) — projected to improve engineer efficiency by up to 40% by reducing manual computation.',
     ],
-    tags: ['Python', 'Git', 'Systems Engineering'],
+    tags: ['Research', 'Finite Element Models', 'Technical Writing'],
   },
 ];
-
-/* ── Skills ───────────────────────────────────────────────────────────────── */
-/* No percentage bars. Nobody believes "Python 90%". Grouped tags read better. */
-
-export const skillGroups = [
-  {
-    title: 'Test & Validation',
-    blurb: 'The day job.',
-    items: [
-      'RF / wireless testing',
-      'Regulatory compliance',
-      'Test automation',
-      'Lab instrumentation',
-      'Firmware validation',
-      'RTOS',
-      'Root-cause debugging',
-      'Test documentation',
-    ],
-  },
-  {
-    title: 'Languages',
-    blurb: 'What I write in.',
-    items: ['Python', 'C', 'C++', 'C#', 'TypeScript', 'JavaScript', 'Java', 'SQL', 'Bash', 'MATLAB'],
-  },
-  {
-    title: 'Software & Data',
-    blurb: 'Side projects and internal tooling.',
-    items: [
-      'FastAPI',
-      'Flask',
-      'Next.js',
-      'React',
-      'Node.js',
-      'REST APIs',
-      'PostgreSQL',
-      'MySQL',
-      'Pandas',
-      'NumPy',
-    ],
-  },
-  {
-    title: 'Tooling & Infra',
-    blurb: 'How it ships and stays running.',
-    items: ['Git / GitHub', 'Docker', 'Linux / RHEL', 'CI/CD', 'Shell scripting', 'PowerShell', 'VMWare'],
-  },
-] as const;
 
 /* ── Projects ─────────────────────────────────────────────────────────────── */
 
 export type Project = {
   id: string;
   title: string;
-  blurb: string;
+  period: string;
   description: string;
+  /** Short bullets. Keep to three or fewer. */
+  points: string[];
+  /** Headline numbers. Two or three. */
+  metrics: { label: string; value: string }[];
   tech: string[];
-  liveUrl?: string;
   githubUrl?: string;
-  status: 'live' | 'in-progress';
-  featured?: boolean;
-  /** Two-letter mark shown on the card when there's no screenshot. */
+  liveUrl?: string;
+  /** Two-character mark shown on the card. */
   mark: string;
 };
 
 export const projects: Project[] = [
   {
-    id: 'url-shortener',
-    title: 'URL Shortener',
-    blurb: 'Link shortening with click analytics.',
+    id: 'modem-conformance-harness',
+    title: 'Modem Conformance Test Harness',
+    period: 'Jul 2026',
     description:
-      'Full-stack URL shortening service with click tracking. Generates short codes, records hit counts and referrers, and exposes the whole thing through an auto-documented REST API.',
-    tech: ['FastAPI', 'Python', 'SQLAlchemy', 'PostgreSQL', 'JavaScript'],
-    liveUrl: 'https://url-shortener-production-440d.up.railway.app',
-    githubUrl: 'https://github.com/rabulsara02/url-shortener',
-    status: 'live',
-    featured: true,
-    mark: 'US',
-  },
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // TODO(rahul): your two test-engineering projects go here.
-  // Fill in the fields and flip status to 'live' when they're ready.
-  // Until then they render honestly as "In progress" cards.
-  // ───────────────────────────────────────────────────────────────────────────
-  {
-    id: 'test-project-1',
-    title: 'Test Automation Project',
-    blurb: 'In progress.',
-    description:
-      'A test-engineering project currently in development. Details coming soon.',
-    tech: ['Python'],
-    status: 'in-progress',
-    mark: '01',
+      'A cellular-modem conformance harness that runs declarative YAML test plans against a device and classifies every failure as a device fault, a timeout, or a fault in the harness itself.',
+    points: [
+      'Separates 82 automated pytest cases from declarative YAML test definitions, covering 21 conformance cases across identity, registration, data-context, and error-handling behavior.',
+      'Every push runs the full conformance pass against a live modem simulator in Docker and publishes JUnit XML and HTML reports as CI artifacts.',
+    ],
+    metrics: [
+      { label: 'Automated tests', value: '82' },
+      { label: 'Conformance cases', value: '21' },
+      { label: 'Fault classification', value: '100%' },
+    ],
+    tech: ['Python', 'pytest', 'YAML', 'Docker', 'GitHub Actions'],
+    githubUrl: 'https://github.com/rabulsara02/modem-conformance-harness',
+    mark: 'MC',
   },
   {
-    id: 'test-project-2',
-    title: 'Instrumentation Project',
-    blurb: 'In progress.',
+    id: 'api-conformance-harness',
+    title: 'API Conformance Test Harness',
+    period: 'Aug 2026',
     description:
-      'A second test-engineering project currently in development. Details coming soon.',
-    tech: ['Python'],
-    status: 'in-progress',
-    mark: '02',
+      'An automated framework that validates a running REST service against its published OpenAPI contract, using a single spec-driven test oracle instead of per-endpoint assertions.',
+    points: [
+      'Measured its own defect-detection rate by seeding 6 labelled defects into the service under test — caught 6 of 6 with zero false positives on a healthy build.',
+      'A contract-drift gate in CI fails the build on any undeclared change to the public interface, catching breaking API changes before consumers do.',
+    ],
+    metrics: [
+      { label: 'Automated tests', value: '109' },
+      { label: 'Negative-path coverage', value: '54%' },
+      { label: 'Seeded defects caught', value: '6/6' },
+    ],
+    tech: ['Python', 'pytest', 'OpenAPI', 'Docker', 'GitHub Actions'],
+    githubUrl: 'https://github.com/rabulsara02/api-conformance-harness',
+    mark: 'AC',
+  },
+  {
+    id: 'symbolic-music-generation',
+    title: 'Symbolic Music Generation',
+    period: 'May — Jun 2025',
+    description:
+      'A decoder-only Transformer trained on symbolic music, with a custom embedding and positional encoding pipeline.',
+    points: [
+      'Multi-stage generation system producing conditional and unconditional output from pitch, pause, and duration tokens in a learned embedding space.',
+    ],
+    metrics: [
+      { label: 'MIDI files', value: '900+' },
+      { label: 'Validation loss', value: '0.8918' },
+      { label: 'Generated segments', value: '1000+' },
+    ],
+    tech: ['PyTorch', 'Transformers', 'Sequence Modeling'],
+    mark: 'SM',
   },
 ];
+
+/* ── Skills ───────────────────────────────────────────────────────────────── */
+
+export const skillGroups = [
+  {
+    title: 'Test & Validation',
+    blurb: 'The core of the work.',
+    items: [
+      'pytest',
+      'JUnit',
+      'YAML-driven test plans',
+      'Fault injection',
+      'RF conformance testing',
+      '3GPP standards',
+      'Negative-path design',
+      'Contract testing',
+    ],
+  },
+  {
+    title: 'Languages',
+    blurb: 'What I write in.',
+    items: [
+      'Python',
+      'Java',
+      'C',
+      'C++',
+      'SQL',
+      'MySQL',
+      'JavaScript',
+      'HTML/CSS',
+      'MATLAB',
+      'Bash',
+      'Ruby',
+    ],
+  },
+  {
+    title: 'Tooling & CI',
+    blurb: 'How it ships and stays honest.',
+    items: [
+      'Git',
+      'Docker',
+      'Docker Compose',
+      'GitHub Actions',
+      'CI/CD',
+      'GDB',
+      'Agile',
+    ],
+  },
+  {
+    title: 'Also',
+    blurb: 'Picked up along the way.',
+    items: ['REST APIs', 'OpenAPI', 'PyTorch', 'Transformers'],
+  },
+] as const;
 
 /* ── Navigation ───────────────────────────────────────────────────────────── */
 

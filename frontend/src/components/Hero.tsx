@@ -61,14 +61,14 @@ export default function Hero() {
               href="#projects"
               className="group inline-flex items-center gap-2 bg-phosphor px-6 py-3 font-mono text-[12px] tracking-[0.12em] text-void uppercase transition-colors hover:bg-fg"
             >
-              Run diagnostics
+              See my work
               <ArrowDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5" />
             </a>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 border border-line-bright px-6 py-3 font-mono text-[12px] tracking-[0.12em] text-fg uppercase transition-colors hover:border-phosphor hover:text-phosphor"
             >
-              Send signal
+              Get in touch
             </a>
             {person.resumeUrl && (
               <a
@@ -78,7 +78,7 @@ export default function Hero() {
                 className="group inline-flex items-center gap-2 px-3 py-3 font-mono text-[12px] tracking-[0.12em] text-fg-3 uppercase transition-colors hover:text-fg"
               >
                 <DocumentIcon className="h-3.5 w-3.5" />
-                Datasheet
+                Resume
                 <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             )}
@@ -117,7 +117,7 @@ export default function Hero() {
         <Reveal delay={370}>
           <div className="mt-6 flex items-center gap-4">
             <span className="font-mono text-[10px] tracking-[0.2em] text-fg-3 uppercase">
-              Ports
+              Find me
             </span>
             <div className="flex items-center gap-2">
               <Port href={links.github} label="GitHub">

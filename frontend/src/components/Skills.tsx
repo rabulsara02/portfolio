@@ -9,9 +9,9 @@ export default function Skills() {
     <Section
       id="skills"
       index="04"
-      channel="Instrumentation"
+      channel="Skills"
       title="What I work with."
-      lead="No percentage bars — nobody believes 'Python 90%'. Here's the actual bench, grouped by what it's for."
+      lead="No percentage bars. Just the list, grouped by what I use it for."
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {skillGroups.map((group, i) => (
@@ -23,7 +23,7 @@ export default function Skills() {
                     channelTone[i % channelTone.length]
                   }`}
                 >
-                  CH{i + 1} · {group.title}
+                  {group.title}
                 </span>
                 <span className="font-mono text-[10px] text-fg-3">
                   {group.items.length}

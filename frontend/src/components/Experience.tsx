@@ -7,9 +7,9 @@ export default function Experience() {
     <Section
       id="experience"
       index="02"
-      channel="Test log"
+      channel="Experience"
       title="Where I've worked."
-      lead="Most recent first. Test engineering now, with a run through NASA's L'SPACE program and a classroom before that."
+      lead="Most recent first."
     >
       <ol className="border-t border-line">
         {experience.map((job, i) => (
@@ -20,13 +20,13 @@ export default function Experience() {
                 <span className="font-mono text-[11px] whitespace-nowrap text-fg-3">
                   {job.period}
                 </span>
-                {i === 0 && (
+                {job.current && (
                   <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.16em] text-phosphor uppercase">
                     <span
                       aria-hidden
                       className="led h-1.5 w-1.5 rounded-full bg-phosphor text-phosphor"
                     />
-                    Running
+                    Current
                   </span>
                 )}
               </div>

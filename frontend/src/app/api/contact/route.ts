@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getSupabase } from '@/lib/supabase';
+import { sendContactNotification } from '@/lib/notify';
 import type { ContactFormData, ContactResponse } from '@/types';
 
 export const runtime = 'nodejs';
@@ -104,6 +105,11 @@ export async function POST(request: Request) {
       { status: 502 }
     );
   }
+
+  // The message is saved at this point, so the submission has succeeded no
+  // matter what happens next. Awaited so the serverless function doesn't get
+  // frozen mid-request, but it swallows its own errors.
+  await sendContactNotification(clean);
 
   return NextResponse.json<ContactResponse>({
     success: true,

@@ -13,7 +13,7 @@ export default function Skills() {
       title="What I work with."
       lead="No percentage bars. Just the list, grouped by what I use it for."
     >
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-3">
         {skillGroups.map((group, i) => (
           <Reveal key={group.title} delay={i * 80}>
             <div className="brackets h-full border border-line bg-panel">

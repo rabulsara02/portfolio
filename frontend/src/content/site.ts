@@ -206,6 +206,12 @@ export const projects: Project[] = [
 
 /* ── Skills ───────────────────────────────────────────────────────────────── */
 
+/*
+ * Kept deliberately short. Everything here is something that matters for a
+ * test or SDET role and that you could be questioned on. Filler removed:
+ * HTML/CSS, Ruby, MATLAB, Agile, and MySQL (folded into SQL). PyTorch and
+ * Transformers still appear as tags on the music project, where they belong.
+ */
 export const skillGroups = [
   {
     title: 'Test & Validation',
@@ -215,28 +221,16 @@ export const skillGroups = [
       'JUnit',
       'YAML-driven test plans',
       'Fault injection',
-      'RF conformance testing',
-      '3GPP standards',
       'Negative-path design',
       'Contract testing',
+      'RF conformance testing',
+      '3GPP standards',
     ],
   },
   {
     title: 'Languages',
     blurb: 'What I write in.',
-    items: [
-      'Python',
-      'Java',
-      'C',
-      'C++',
-      'SQL',
-      'MySQL',
-      'JavaScript',
-      'HTML/CSS',
-      'MATLAB',
-      'Bash',
-      'Ruby',
-    ],
+    items: ['Python', 'Java', 'C', 'C++', 'SQL', 'Bash'],
   },
   {
     title: 'Tooling & CI',
@@ -247,14 +241,9 @@ export const skillGroups = [
       'Docker Compose',
       'GitHub Actions',
       'CI/CD',
+      'OpenAPI',
       'GDB',
-      'Agile',
     ],
-  },
-  {
-    title: 'Also',
-    blurb: 'Picked up along the way.',
-    items: ['REST APIs', 'OpenAPI', 'PyTorch', 'Transformers'],
   },
 ] as const;
 

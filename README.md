@@ -2,7 +2,7 @@
 
 Personal site. Next.js App Router, TypeScript, Tailwind v4, deployed on Vercel.
 
-Live: https://portfolio-umber-one-64.vercel.app
+Live: https://rahulbulsara.com
 
 ## Editing content
 

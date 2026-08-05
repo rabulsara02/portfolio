@@ -26,6 +26,10 @@ const title = `${person.name} — ${person.role}`;
 const description = person.intro;
 
 export const metadata: Metadata = {
+  // Resolves every relative URL below (canonical, OG images) against the real
+  // domain instead of the deployment's vercel.app hostname.
+  metadataBase: new URL(person.siteUrl),
+  alternates: { canonical: '/' },
   title: {
     default: title,
     template: `%s — ${person.name}`,
@@ -42,7 +46,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: person.name }],
   creator: person.name,
-  openGraph: { title, description, type: 'profile', siteName: person.name },
+  openGraph: {
+    title,
+    description,
+    type: 'profile',
+    siteName: person.name,
+    url: person.siteUrl,
+    locale: 'en_US',
+  },
   twitter: { card: 'summary_large_image', title, description },
   icons: { icon: '/favicon.ico' },
 };

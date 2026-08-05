@@ -27,6 +27,10 @@ export const person = {
   location: 'San Francisco, CA',
   email: 'rahulvbulsara@gmail.com',
 
+  // Canonical origin. Used for metadataBase, the canonical <link>, and to
+  // resolve Open Graph image paths. No trailing slash.
+  siteUrl: 'https://rahulbulsara.com',
+
   // Drop a PDF at frontend/public/resume.pdf to turn on the "Datasheet" button.
   // Set to null to hide the button.
   resumeUrl: null as string | null,

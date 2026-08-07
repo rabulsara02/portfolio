@@ -55,7 +55,10 @@ export const metadata: Metadata = {
     locale: 'en_US',
   },
   twitter: { card: 'summary_large_image', title, description },
-  icons: { icon: '/favicon.ico' },
+  // No `icons` key on purpose. Next's file-based convention picks up
+  // app/icon.png and app/apple-icon.png automatically. Declaring icons here
+  // overrides that — which is how this ended up pointing at a favicon.ico
+  // that had already been deleted, leaving the tab blank.
 };
 
 export default function RootLayout({

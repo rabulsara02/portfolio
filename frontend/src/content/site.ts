@@ -27,9 +27,8 @@ export const person = {
   // resolve Open Graph image paths. No trailing slash.
   siteUrl: 'https://rahulbulsara.com',
 
-  // Drop a PDF at frontend/public/resume.pdf to turn on the Resume button.
-  // Set to null to hide it.
-  resumeUrl: null as string | null,
+  // Served from frontend/public/resume.pdf. Set to null to hide the button.
+  resumeUrl: '/resume.pdf' as string | null,
 
   // Shown in the hero panel next to a status light.
   availability: 'Open to SDET and test automation roles',
@@ -144,6 +143,12 @@ export type Project = {
   liveUrl?: string;
   /** Two-character mark shown on the card. */
   mark: string;
+  /**
+   * Shows a green "Pass" lamp on the card. Only set this on projects where a
+   * passing test suite is the actual point — it reads as a claim about CI, so
+   * it shouldn't appear on things that aren't test projects.
+   */
+  passing?: boolean;
 };
 
 export const projects: Project[] = [
@@ -166,6 +171,7 @@ export const projects: Project[] = [
     tech: ['Python', 'pytest', 'YAML', 'Docker', 'GitHub Actions'],
     githubUrl: 'https://github.com/rabulsara02/modem-conformance-harness',
     mark: 'MC',
+    passing: true,
   },
   {
     id: 'api-conformance-harness',
@@ -193,6 +199,7 @@ export const projects: Project[] = [
     ],
     githubUrl: 'https://github.com/rabulsara02/api-conformance-harness',
     mark: 'AC',
+    passing: true,
   },
   {
     id: 'symbolic-music-generation',

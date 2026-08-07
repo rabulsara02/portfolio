@@ -48,13 +48,15 @@ function ProjectCard({ project, seed }: { project: Project; seed: number }) {
           <span className="text-phosphor">{project.mark}</span>
           {project.period}
         </span>
-        <span className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.18em] text-phosphor uppercase">
-          <span
-            aria-hidden
-            className="led h-1.5 w-1.5 rounded-full bg-phosphor text-phosphor"
-          />
-          Pass
-        </span>
+        {project.passing && (
+          <span className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.18em] text-phosphor uppercase">
+            <span
+              aria-hidden
+              className="led h-1.5 w-1.5 rounded-full bg-phosphor text-phosphor"
+            />
+            Pass
+          </span>
+        )}
       </div>
 
       <div className="p-5 sm:p-6">

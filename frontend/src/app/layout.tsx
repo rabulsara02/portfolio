@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, IBM_Plex_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { person } from '@/content/site';
 
@@ -84,6 +85,12 @@ export default function RootLayout({
           deployments — local dev and previews are no-ops.
         */}
         <Analytics />
+        {/*
+          Core Web Vitals measured from real visits rather than a synthetic
+          lab run — so it reflects actual phones on actual networks, not a
+          fast machine on fibre.
+        */}
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -154,13 +154,14 @@ export const projects: Project[] = [
     description:
       'A cellular-modem conformance harness that runs declarative YAML test plans against a device and classifies every failure as a device fault, a timeout, or a fault in the harness itself.',
     points: [
-      'Separates 82 automated pytest cases from declarative YAML test definitions, covering 21 conformance cases across identity, registration, data-context, and error-handling behavior.',
+      'Separates 81 automated pytest cases from declarative YAML test definitions, covering 21 conformance cases across identity, registration, data-context, and error-handling behavior.',
+      'Talks to the device through a Transport interface rather than a raw socket, so the same suite runs against the simulator or a real serial modem without touching the driver.',
       'Every push runs the full conformance pass against a live modem simulator in Docker and publishes JUnit XML and HTML reports as CI artifacts.',
     ],
     metrics: [
-      { label: 'Automated tests', value: '82' },
+      { label: 'Automated tests', value: '81' },
       { label: 'Conformance cases', value: '21' },
-      { label: 'Fault classification', value: '100%' },
+      { label: 'Fault classification', value: '6/6' },
     ],
     tech: ['Python', 'pytest', 'YAML', 'Docker', 'GitHub Actions'],
     githubUrl: 'https://github.com/rabulsara02/modem-conformance-harness',
@@ -171,17 +172,25 @@ export const projects: Project[] = [
     title: 'API Conformance Test Harness',
     period: 'Aug 2026',
     description:
-      'An automated framework that validates a running REST service against its published OpenAPI contract, using a single spec-driven test oracle instead of per-endpoint assertions.',
+      'An automated framework that validates a running REST service against its published OpenAPI contract, using a single spec-driven test oracle covering 8 endpoints and 24 declared status codes instead of per-endpoint assertions.',
     points: [
       'Measured its own defect-detection rate by seeding 6 labelled defects into the service under test — caught 6 of 6 with zero false positives on a healthy build.',
+      'Added contract-driven property-based testing that generates ~500 requests per run. It found 9 defects on a build the 22 hand-written cases passed, two of them genuine contract bugs — an undocumented 400 and a query parameter wrongly declared nullable. Both fixed, all 9 triaged.',
       'A contract-drift gate in CI fails the build on any undeclared change to the public interface, catching breaking API changes before consumers do.',
     ],
     metrics: [
-      { label: 'Automated tests', value: '109' },
+      { label: 'Automated tests', value: '139' },
       { label: 'Negative-path coverage', value: '54%' },
       { label: 'Seeded defects caught', value: '6/6' },
     ],
-    tech: ['Python', 'pytest', 'OpenAPI', 'Docker', 'GitHub Actions'],
+    tech: [
+      'Python',
+      'pytest',
+      'OpenAPI',
+      'schemathesis',
+      'Docker',
+      'GitHub Actions',
+    ],
     githubUrl: 'https://github.com/rabulsara02/api-conformance-harness',
     mark: 'AC',
   },

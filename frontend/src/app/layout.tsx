@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, IBM_Plex_Mono } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { person } from '@/content/site';
 
@@ -77,6 +78,12 @@ export default function RootLayout({
         </a>
         <div className="relative z-10">{children}</div>
         <div aria-hidden className="scanlines" />
+        {/*
+          Vercel Web Analytics. Cookie-free and does not collect personal data,
+          so no consent banner is required. Only sends anything on production
+          deployments — local dev and previews are no-ops.
+        */}
+        <Analytics />
       </body>
     </html>
   );
